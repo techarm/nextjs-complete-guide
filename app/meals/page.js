@@ -5,6 +5,12 @@ import { getMeals } from '@/lib/meals';
 
 import classes from './page.module.css';
 
+// ページのメータデータを定義
+export const metadata = {
+  title: 'All Meals',
+  description: 'Browse the delicious meals shared by our vibrant community.',
+};
+
 export async function Meals() {
   const meals = await getMeals();
   return <MealsGrid meals={meals} />;

@@ -4,6 +4,22 @@ import { notFound } from 'next/navigation';
 import { getMeal } from '@/lib/meals';
 import classes from './page.module.css';
 
+// パラメータからメータデータを生成
+export async function generateMetadata({ params }) {
+  const meal = await getMeal(params.mealSlug);
+
+  if (!meal) {
+    notFound();
+  }
+
+  console.log(meal);
+
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
+
 export default async function MealDetailsPage({ params }) {
   const meal = await getMeal(params.mealSlug);
 
