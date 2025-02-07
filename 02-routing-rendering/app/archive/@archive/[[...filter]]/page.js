@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import NewsList from '@/components/news-list';
 import { getAvailableNewsMonths, getAvailableNewsYears, getNewsForYear, getNewsForYearAndMonth } from '@/lib/news';
+import { notFound } from 'next/navigation';
 
 export default async function FilteredNewsPage({ params }) {
   const { filter } = await params;
@@ -26,6 +27,14 @@ export default async function FilteredNewsPage({ params }) {
 
   if (news && news.length > 0) {
     newsContent = <NewsList news={news} />;
+  }
+
+  if (
+    (selectedYear && !getAvailableNewsYears().includes(+selectedYear)) ||
+    (selectedMonth && !getAvailableNewsMonths(selectedYear).includes(+selectedMonth))
+  ) {
+    // throw new Error('Invalid filter.');
+    notFound();
   }
 
   return (
