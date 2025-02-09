@@ -1,8 +1,8 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { storePost } from '@/lib/posts';
 import { uploadImage } from '@/lib/cloudinary';
+import { storePost, updatePostLikeStatus } from '@/lib/posts';
 
 export async function createPost(prevState, formData) {
   const title = formData.get('title');
@@ -35,10 +35,14 @@ export async function createPost(prevState, formData) {
       content,
       userId: 1,
     });
-
-    redirect('/feed');
   } catch (error) {
     console.log(error);
     throw new Error('Image upload failed, post was not created. Please try again later.');
   }
+
+  redirect('/feed');
+}
+
+export async function togglePostLikeStatus(postId) {
+  updatePostLikeStatus(postId, 2);
 }
