@@ -1,6 +1,7 @@
 'use server';
 
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 import { uploadImage } from '@/lib/cloudinary';
 import { storePost, updatePostLikeStatus } from '@/lib/posts';
 
@@ -40,9 +41,11 @@ export async function createPost(prevState, formData) {
     throw new Error('Image upload failed, post was not created. Please try again later.');
   }
 
+  revalidatePath('/', 'layout');
   redirect('/feed');
 }
 
 export async function togglePostLikeStatus(postId) {
   updatePostLikeStatus(postId, 2);
+  revalidatePath('/', 'layout');
 }
