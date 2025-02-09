@@ -5,6 +5,9 @@
     },
     {
       "path": "02-routing-rendering"
+    },
+    {
+      "path": "03-data-mutation"
     }
   ],
   "settings": {}
