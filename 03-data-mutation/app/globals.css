@@ -132,14 +132,14 @@ main {
 }
 
 .form-errors {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
+  border-radius: 0.5rem;
+  background: #a80a69;
+  padding: 0.5rem 1rem;
 }
 
 .form-errors li {
   margin: 0.35rem 0;
-  color: #c882a2;
+  color: white;
 }
 
 .posts {
