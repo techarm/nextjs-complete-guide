@@ -8,6 +8,9 @@
     },
     {
       "path": "03-data-mutation"
+    },
+    {
+      "path": "04-authentication"
     }
   ],
   "settings": {}
