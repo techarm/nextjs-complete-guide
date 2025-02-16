@@ -60,3 +60,22 @@ export async function verifyAuth() {
 
   return result;
 }
+
+export async function destroySession() {
+  const { session } = await verifyAuth();
+  if (!session) {
+    return { error: 'User is not logged in.' };
+  }
+
+  await lucia.invalidateSession(session.id);
+
+  const sessionCookie = lucia.createBlankSessionCookie();
+  const cookie = await cookies();
+  cookie.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+}
+
+// https://v3.lucia-auth.com/basics/sessions
+// Delete all expired sessions
+// Use Lucia.deleteExpiredSessions() to delete all expired sessions in the database.
+// We recommend setting up a cron-job to clean up your database on a set interval.
+// await lucia.deleteExpiredSessions();
