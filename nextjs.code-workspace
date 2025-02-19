@@ -11,6 +11,9 @@
     },
     {
       "path": "04-authentication"
+    },
+    {
+      "path": "05-prj-events"
     }
   ],
   "settings": {}
