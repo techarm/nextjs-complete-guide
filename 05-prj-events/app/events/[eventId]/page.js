@@ -1,14 +1,31 @@
+import { Fragment } from 'react';
+
+import ErrorAlert from '@/components/ui/error-alert';
 import { getEventById } from '@/dummy-data';
+import EventSummary from '@/components/event-detail/event-summary';
+import EventLogistics from '@/components/event-detail/event-logistics';
+import EventContent from '@/components/event-detail/event-content';
 
 async function EventDetail({ params }) {
-  const eventId = await params.eventId;
+  const { eventId } = await params;
   const event = getEventById(eventId);
 
+  if (!event) {
+    return (
+      <ErrorAlert>
+        <p>No event found!</p>
+      </ErrorAlert>
+    );
+  }
+
   return (
-    <div>
-      <h1>{event.title}</h1>
-      <p>{event.description}</p>
-    </div>
+    <Fragment>
+      <EventSummary title={event.title} />
+      <EventLogistics date={event.date} address={event.location} image={event.image} imageAlt={event.title} />
+      <EventContent>
+        <p>{event.description}</p>
+      </EventContent>
+    </Fragment>
   );
 }
 
