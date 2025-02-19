@@ -1,11 +1,11 @@
-import Button from '@/components/ui/button';
-import ErrorAlert from '@/components/ui/error-alert';
+import EventList from '@/components/events/event-list';
+import { getFeaturedEvents } from '@/dummy-data';
 
 export default function Home() {
+  const featuredEvents = getFeaturedEvents();
   return (
     <div>
-      <Button>Click me!</Button>
-      <ErrorAlert>An error occurred!</ErrorAlert>
+      <EventList items={featuredEvents} />
     </div>
   );
 }
