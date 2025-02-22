@@ -1,14 +1,14 @@
 import { Fragment } from 'react';
 
 import ErrorAlert from '@/components/ui/error-alert';
-import { getEventById } from '@/dummy-data';
 import EventSummary from '@/components/event-detail/event-summary';
 import EventLogistics from '@/components/event-detail/event-logistics';
 import EventContent from '@/components/event-detail/event-content';
+import { getEventById } from '@/lib/api-util';
 
 async function EventDetail({ params }) {
   const { eventId } = await params;
-  const event = getEventById(eventId);
+  const event = await getEventById(eventId);
 
   if (!event) {
     return (

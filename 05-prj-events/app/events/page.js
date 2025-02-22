@@ -1,23 +1,15 @@
-'use client';
-
 import { Fragment } from 'react';
-import { redirect } from 'next/navigation';
 
 import EventList from '@/components/events/event-list';
 import EventsSearch from '@/components/events/events-search';
-import { getAllEvents } from '@/dummy-data';
+import { getAllEvents } from '@/lib/api-util';
 
-function AllEvents() {
-  const events = getAllEvents();
-
-  function findEventsHandler(year, month) {
-    const fullPath = `/events/${year}/${month}`;
-    redirect(fullPath);
-  }
+async function AllEvents() {
+  const events = await getAllEvents();
 
   return (
     <Fragment>
-      <EventsSearch onSearch={findEventsHandler} />
+      <EventsSearch />
       <EventList items={events} />
     </Fragment>
   );

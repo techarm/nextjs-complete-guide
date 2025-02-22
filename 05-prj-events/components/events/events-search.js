@@ -1,11 +1,12 @@
 'use client';
 
 import { useRef } from 'react';
+import { redirect } from 'next/navigation';
 
 import Button from '@/components/ui/button';
 import classes from './events-search.module.css';
 
-function EventsSearch({ onSearch }) {
+function EventsSearch() {
   const yearInputRef = useRef();
   const monthInputRef = useRef();
 
@@ -15,7 +16,8 @@ function EventsSearch({ onSearch }) {
     const selectedYear = yearInputRef.current.value;
     const selectedMonth = monthInputRef.current.value;
 
-    onSearch(selectedYear, selectedMonth);
+    const fullPath = `/events/${selectedYear}/${selectedMonth}`;
+    redirect(fullPath);
   }
 
   return (

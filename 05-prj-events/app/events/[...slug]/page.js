@@ -4,7 +4,7 @@ import Button from '@/components/ui/button';
 import ErrorAlert from '@/components/ui/error-alert';
 import ResultsTitle from '@/components/events/results-title';
 import EventList from '@/components/events/event-list';
-import { getFilteredEvents } from '@/dummy-data';
+import { getFilteredEvents } from '@/lib/api-util';
 
 async function FilteredEventsPage({ params }) {
   const { slug: filterData } = await params;
@@ -31,7 +31,7 @@ async function FilteredEventsPage({ params }) {
     );
   }
 
-  const filteredEvents = getFilteredEvents({
+  const filteredEvents = await getFilteredEvents({
     year: numYear,
     month: numMonth,
   });
